@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: deployment-example
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: simple-nodejs
+    spec:
+      containers:
+      - name: k8s-demo
+        image: wardviaene/k8s-demo
+        ports:
+        - name: nodejs-port
+          containerPort: 3000
+
