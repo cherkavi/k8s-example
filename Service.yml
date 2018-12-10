@@ -13,10 +13,12 @@ spec:
   ports:
   - name: http
     port: 80
+    nodePort: 8080
     targetPort: nodejs-port
     protocol: TCP
   - name: https
     port: 443
+    nodePort: 8443
     targetPort: nodejs-port
     protocol: TCP
   selector:
