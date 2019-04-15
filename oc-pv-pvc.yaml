@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-test-scenario-description-home-prod
+  namespace: test-scenario-description
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  claimRef:
+    namespace: test-scenario-description
+    name: pvc-test-scenario-description-home-prod
+  flexVolume:
+    driver: "mapr.com/maprfs"
+    options:
+      platinum: "false"
+      cluster: "dp.prod.munich"
+      cldbHosts: "dpmesp000004.adv.org,dpmesp000007.adv.org"
+      volumePath: "/tmp"
+      securityType: "secure"
+      ticketSecretName: "volume-ticket-home"
+      ticketSecretNamespace: "test-scenario-description"
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: pvc-test-scenario-description-home-prod
+  namespace: test-scenario-description
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeName: pv-test-scenario-description-home-prod
+  resources:
+    requests:
+      storage: 1G
+
